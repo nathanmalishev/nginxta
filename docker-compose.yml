@@ -1,0 +1,10 @@
+version: '2'
+services:
+  dev-api:
+    image: uomacct/ta-backend:latest
+  prod-api:
+    image: uomacct/ta-backend:production
+  nginx:
+   image: uomacct/nginxta:latest
+   ports:
+   - "80:80"
