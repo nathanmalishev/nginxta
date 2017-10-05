@@ -1,0 +1,24 @@
+dev-api:
+  autoredeploy: true
+  image: 'uomacct/ta-backend:latest'
+  restart: always
+lb:
+  image: 'nathanmalishev/nginxta:latest'
+  links:
+    - dev-api
+    - prod-api
+  ports:
+    - '80:80'
+  roles:
+    - global
+prod-api:
+  autoredeploy: true
+  image: 'uomacct/ta-backend:production'
+  restart: always
+slackbot:
+  autoredeploy: true
+  environment:
+    - API_TOKEN=xoxb-167563516082-FpIXnlo9Qb8Me1Omg0yZ62Iy
+    - 'WEBHOOK=https://hooks.slack.com/services/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'
+  image: 'nathanmalishev/whisper:latest'
+  restart: always
